@@ -29,3 +29,4 @@ describe('#hashTwoSum', function() {
 		expect(hashTwoSum(array, sum)).toEqual([[2, 4], [3, 3]])
 	})
 })
+let hash = {2: '2', 3: '3', 4: '4', 3.01: '3', 6: '6', 7: '7'}
