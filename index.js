@@ -13,17 +13,23 @@ function bruteForceTwoSum(array, sum) {
 function binarySearchTwoSum(array, sum) {
   const sortedArray = mergeSort(array);
   let result = [];
-  for (let i=0; i<array.length; i++) {
-    if (binaryMatch(sortedArray, (sum - array[i]))) {
-      result.push([sortedArray[i], sum - array[i]])
+  for (let i=0; i<sortedArray.length; i++) {
+    let missingNum = sum - sortedArray[i];
+    if (binaryMatch(sortedArray, missingNum)) {
+      result.push([sortedArray[i], missingNum]);
+      sortedArray.splice(i, 1);
+      sortedArray.splice(sortedArray.indexOf(missingNum), 1);
     }
   }
-  return result.slice(0, 2);
+  return result;
 }
 
-function hashTwoSum(array, sum) {
-  return [[2, 4], [3, 3]]
-}
+// Push all numbers into a hash and use O(1) lookup to see if a matching number
+// is there
+
+// function hashTwoSum(array, sum) {
+//
+// }
 
 
 // HELPER FUNCTIONS
