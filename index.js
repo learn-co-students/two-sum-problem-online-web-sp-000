@@ -13,21 +13,36 @@ function bruteForceTwoSum(array, sum){
 }
 
 function binarySearchTwoSum(array, sum){
-  const target = [];
+  let target = [];
   array = array.sort();
 
-  for (let e of array){
+  for (let [i, e] of array.entries()){
+    // must allow duplicates - don't filter for uniques!
+    let prev;
+    if (i - 1 >= 0)
+      prev = array[i - 1];
+    if (prev === e)
+      continue;
+
     const missingNum = sum - e;
-    if (binaryMatch(array, missingNum))
-      target.push([e, missingNum]);
+    const result = [e, missingNum];
+
+    if (binaryMatch(array, missingNum)){
+      target.push(result.sort());
+      const index = array.indexOf(missingNum);
+      if (index > -1) {
+        array.splice(index, 1);
+      }
+
+    }
+
   }
-  return array;
   return target;
 }
 
 function binaryMatch(sortedArray, missingNum){
   let i = 0;
-  let j = Math.floor((sortedArray.length - 1) / 2);
+  let j = Math.ceil((sortedArray.length - 1) / 2);
   let prevMax = sortedArray.length - 1;
 
   let counts = {};
@@ -41,14 +56,14 @@ function binaryMatch(sortedArray, missingNum){
 
     if (missingNum < sortedArray[j]){
       prevMax = j;
-      j = j - Math.floor((j - i) / 2);
+      j = j - Math.ceil((j - i) / 2);
     } else if (missingNum > sortedArray[j]) {
       i = j + 1;
       j = prevMax;
     } else if (missingNum === sortedArray[j]) {
       return true;
     }
-    if (counts[sortedArray[j]] === 3)
+    if (counts[sortedArray[j]] === 2)
       return false;
   }
 
