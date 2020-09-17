@@ -21,6 +21,7 @@ function binarySearchTwoSum(array, sum){
     if (binaryMatch(array, missingNum))
       target.push([e, missingNum]);
   }
+  return array;
   return target;
 }
 
