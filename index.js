@@ -33,9 +33,7 @@ function binarySearchTwoSum(array, sum){
       if (index > -1) {
         array.splice(index, 1);
       }
-
     }
-
   }
   return target;
 }
@@ -76,7 +74,7 @@ function hashTwoSum(array, sum){
   for (let e of array){
     let difference = sum - e;
     if (obj[difference])
-      target.push([difference, e])
+      target.push([difference, e]);
     if (!obj[e])
       obj[e] = true;
   }
